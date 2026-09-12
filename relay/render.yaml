@@ -1,0 +1,14 @@
+# Render Blueprint — deploys the Linkline WebSocket relay on the free tier.
+# Dashboard > New + > Blueprint > point at this repo.
+services:
+  - type: web
+    name: linkline-relay
+    runtime: node
+    plan: free
+    buildCommand: npm install ws
+    startCommand: node relay/server.mjs
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
